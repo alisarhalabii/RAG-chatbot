@@ -1,0 +1,21 @@
+
+#virtual local enviroment, will build  again in pyproject.toml
+.venv/
+
+
+
+# python bytecode
+__pycache__/
+*.py[cod]
+
+# secrets that should never be in git
+#will end up in azure openai api key
+# dont want keys compromized
+.env
+
+#data types
+data/raw/
+data/chroma/
+
+#applications to edit code
+.vscode/
