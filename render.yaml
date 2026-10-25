@@ -1,0 +1,18 @@
+# Render "Blueprint" for one-click deploy of the FastAPI backend.
+# In Render: New -> Blueprint -> point at this repo -> it reads this file automatically.
+services:
+  - type: web
+    name: rag-chatbot-api
+    runtime: python
+    plan: free
+    buildCommand: "pip install -e . && python -m rag_chatbot.ingest"
+    startCommand: "uvicorn rag_chatbot.api:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: LLM_PROVIDER
+        value: groq
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_MODEL
+        value: llama-3.1-8b-instant
+      - key: ALLOWED_ORIGINS
+        value: http://localhost:3000
