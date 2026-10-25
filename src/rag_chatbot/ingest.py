@@ -38,7 +38,10 @@ def embed_and_store(chunks: list[dict]) -> None:
     """Embedding chunks and storing in chroma"""
     model = SentenceTransformer(EMBEDDING_MODEL)
     client = chromadb.PersistentClient(path=str(CHROMA_DIR))
-    collection = client.get_or_create_collection("documents")
+    collection = client.get_or_create_collection(
+    "documents",
+    metadata={"hnsw:space": "cosine"},
+)
 
     texts= [c["text"] for c in chunks]
     embeddings = model.encode(texts).tolist()

@@ -19,3 +19,6 @@ data/chroma/
 
 #applications to edit code
 .vscode/
+
+#ended up in the repo, but not needed for the project
+*.egg-info/

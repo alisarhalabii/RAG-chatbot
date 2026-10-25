@@ -7,7 +7,10 @@ def query(question: str, n_results: int= 3) -> list[dict]:
     """Find the n most relevant chunks for a users query"""
     model = SentenceTransformer(EMBEDDING_MODEL)
     client= chromadb.PersistentClient(path=str(CHROMA_DIR))
-    collection = client.get_or_create_collection("documents")
+    collection = client.get_or_create_collection(
+    "documents",
+    metadata={"hnsw:space": "cosine"},
+)
 
     question_embedding= model.encode(question).tolist()
     
